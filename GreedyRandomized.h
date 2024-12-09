@@ -1,10 +1,12 @@
 #pragma once
 #include "Algorithm.h"
+#include <random>
+#include <algorithm>
 
-class DynamicProgramming
+class GreedyRandomized
 	: public Algorithm
 {
 public:
-	DynamicProgramming(Problem* p);
+	GreedyRandomized(Problem* p);
 	void solve() override;
 };

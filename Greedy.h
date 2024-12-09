@@ -5,5 +5,6 @@ class Greedy
 	: public Algorithm
 {
 public:
-	void solve(bool randomized);
+	Greedy(Problem* p);
+	void solve() override;
 };

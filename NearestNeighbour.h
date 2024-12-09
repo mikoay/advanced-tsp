@@ -1,10 +1,10 @@
 #pragma once
 #include "Algorithm.h"
 
-class DynamicProgramming
+class NearestNeighbour
 	: public Algorithm
 {
 public:
-	DynamicProgramming(Problem* p);
+	NearestNeighbour(Problem* p);
 	void solve() override;
 };

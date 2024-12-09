@@ -1,10 +1,10 @@
 #pragma once
 #include "Algorithm.h"
 
-class DynamicProgramming
+class SimulatedAnnealing
 	: public Algorithm
 {
 public:
-	DynamicProgramming(Problem* p);
+	SimulatedAnnealing(Problem* p);
 	void solve() override;
 };

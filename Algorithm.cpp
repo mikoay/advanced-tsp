@@ -2,6 +2,7 @@
 
 Algorithm::Algorithm()
 {
+
 }
 
 Algorithm::~Algorithm()

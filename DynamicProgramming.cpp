@@ -1,12 +1,17 @@
 #include "DynamicProgramming.h"
 
-void DynamicProgramming::solve() 
+DynamicProgramming::DynamicProgramming(Problem* p)
+{
+    this->problem = p;
+}
+
+void DynamicProgramming::solve()
 {
     const int INF = std::numeric_limits<int>::max();
-    unsigned int n = problem->n;
-    const auto& d = problem->d;
-    const auto& t = problem->t;
-    unsigned int z = problem->z;
+    unsigned int n = this->problem->n;
+    const auto& d = this->problem->d;
+    const auto& t = this->problem->t;
+    unsigned int z = this->problem->z;
     std::vector<std::vector<int>> DP(1 << n, std::vector<int>(n, INF));
     std::vector<std::vector<int>> fuel(1 << n, std::vector<int>(n, INF));
     std::vector<std::vector<int>> parent(1 << n, std::vector<int>(n, -1));
@@ -62,7 +67,7 @@ void DynamicProgramming::solve()
     }
     if (min_distance == INF) 
     {
-        std::cout << "Brak dopuszczalnego rozwi¹zania." << std::endl;
+        std::cout << "Brak dopuszczalnego rozwiazania." << std::endl;
         return;
     }
     std::vector<int> path;
@@ -77,8 +82,9 @@ void DynamicProgramming::solve()
     }
     reverse(path.begin(), path.end());
     path.push_back(0);
+    std::cout << "====DYNAMIC PROGRAMMING====" << std::endl;
     std::cout << "Minimalny dystans: " << min_distance << std::endl;
-    std::cout << "Œcie¿ka: ";
+    std::cout << "Sciezka: ";
     for (int city : path) 
     {
         std::cout << city << " ";
