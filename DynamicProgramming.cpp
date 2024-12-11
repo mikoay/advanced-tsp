@@ -67,7 +67,7 @@ void DynamicProgramming::solve()
     }
     if (min_distance == INF) 
     {
-        std::cout << "Brak dopuszczalnego rozwiazania." << std::endl;
+        std::cout << "Brak dopuszczalnego rozwiazania" << std::endl;
         return;
     }
     std::vector<int> path;

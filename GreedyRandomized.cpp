@@ -30,7 +30,7 @@ void GreedyRandomized::solve()
         }
         if (candidates.empty()) 
         {
-            std::cerr << "Brak dopuszczalnego rozwi¹zania." << std::endl;
+            std::cerr << "Brak dopuszczalnego rozwiazania" << std::endl;
             return;
         }
         int next_city;

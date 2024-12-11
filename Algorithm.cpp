@@ -2,7 +2,7 @@
 
 Algorithm::Algorithm()
 {
-
+	this->problem = nullptr;
 }
 
 Algorithm::~Algorithm()

@@ -24,18 +24,18 @@ int main()
 	};
 	unsigned int z = 100;
 	Problem* tsp = new Problem(n, d, t, z);
-	//tsp->generateInstance(4, 0, 50, 20, 60, 10);
+	tsp->generateInstance(5, 0, 100, 25, 50, 20);
 	tsp->printProblem();
 	std::vector<Algorithm*> solvers = {
 		new DynamicProgramming(tsp),
 		new Greedy(tsp),
 		new GreedyRandomized(tsp),
-		new NearestNeighbour(tsp)
+		new NearestNeighbour(tsp),
+		new SimulatedAnnealing(tsp, 1000, 0.95, 1000)
 	};
-	//solvers.push_back(new NearestNeighbour);
-	//solvers.push_back(new SimulatedAnnealing);
 	for (auto &algorithm : solvers) {
 		algorithm->solve();
+		delete algorithm;
 	}
 	delete tsp;
 	return 0;

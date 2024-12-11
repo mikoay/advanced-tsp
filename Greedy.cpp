@@ -30,7 +30,7 @@ void Greedy::solve()
         }
         if (next_city == -1) 
         {
-            std::cerr << "Brak dopuszczalnego rozwiazania." << std::endl;
+            std::cerr << "Brak dopuszczalnego rozwiazania" << std::endl;
             return;
         }
         route.push_back(next_city);
