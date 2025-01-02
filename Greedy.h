@@ -6,5 +6,5 @@ class Greedy
 {
 public:
 	Greedy(Problem* p);
-	void solve() override;
+	std::vector<int> solve() override;
 };

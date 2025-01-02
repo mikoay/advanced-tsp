@@ -5,7 +5,7 @@ GreedyRandomized::GreedyRandomized(Problem* p)
     this->problem = p;
 }
 
-void GreedyRandomized::solve()
+std::vector<int> GreedyRandomized::solve()
 {
     std::vector<int> route;
     std::vector<bool> visited(problem->n, false);
@@ -30,8 +30,7 @@ void GreedyRandomized::solve()
         }
         if (candidates.empty()) 
         {
-            std::cerr << "Brak dopuszczalnego rozwiazania" << std::endl;
-            return;
+            return {};
         }
         int next_city;
         std::vector<int> close_candidates;
@@ -50,22 +49,11 @@ void GreedyRandomized::solve()
         current_time += problem->d[route[route.size() - 2]][current_city];
         total_distance += problem->d[route[route.size() - 2]][current_city];
     }
-    if (problem->d[current_city][0] <= problem->z) 
+    total_distance += problem->d[current_city][0];
+    route.push_back(0);
+    if (total_distance > problem->z)
     {
-        total_distance += problem->d[current_city][0];
-        route.push_back(0);
+        return {};
     }
-    else 
-    {
-        std::cerr << "Brak dopuszczalnego rozwi¹zania" << std::endl;
-        return;
-    }
-    std::cout << "=====GREEDY RANDOMIZED=====" << std::endl;
-    std::cout << "Minimalny dystans: " << total_distance << std::endl;
-    std::cout << "Sciezka: ";
-    for (int city : route) 
-    {
-        std::cout << city << " ";
-    }
-    std::cout << std::endl;
+    return route;
 }

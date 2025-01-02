@@ -5,7 +5,7 @@ class Algorithm
 {
 public:
 	Problem* problem;
-	virtual void solve() = 0;
+	virtual std::vector<int> solve() = 0;
 	Algorithm();
 	~Algorithm();
 };

@@ -8,7 +8,7 @@ SimulatedAnnealing::SimulatedAnnealing(Problem* p, double it, double cr, double 
     this->max_iterations = mi;
 }
 
-void SimulatedAnnealing::solve()
+std::vector<int> SimulatedAnnealing::solve()
 {
     srand(time(NULL));
     current_solution.resize(problem->n + 1);
@@ -40,17 +40,11 @@ void SimulatedAnnealing::solve()
     }
     if (best_distance == -1) 
     {
-        std::cout << "Brak dopuszczalnego rozwiazania" << std::endl;
+        return {};
     }
     else 
     {
-        std::cout << "====SIMULATED ANNEALING====" << std::endl;
-        std::cout << "Minimalny dystans: " << best_distance << std::endl;
-        std::cout << "Sciezka: ";
-        for (int city : best_solution) 
-        {
-            std::cout << city << " ";
-        }
+        return best_solution;
     }
 }
 

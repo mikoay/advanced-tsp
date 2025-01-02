@@ -5,7 +5,7 @@ DynamicProgramming::DynamicProgramming(Problem* p)
     this->problem = p;
 }
 
-void DynamicProgramming::solve()
+std::vector<int> DynamicProgramming::solve()
 {
     const int INF = std::numeric_limits<int>::max();
     unsigned int n = this->problem->n;
@@ -67,8 +67,7 @@ void DynamicProgramming::solve()
     }
     if (min_distance == INF) 
     {
-        std::cout << "Brak dopuszczalnego rozwiazania" << std::endl;
-        return;
+        return {};
     }
     std::vector<int> path;
     int current_city = last_city;
@@ -82,12 +81,5 @@ void DynamicProgramming::solve()
     }
     reverse(path.begin(), path.end());
     path.push_back(0);
-    std::cout << "====DYNAMIC PROGRAMMING====" << std::endl;
-    std::cout << "Minimalny dystans: " << min_distance << std::endl;
-    std::cout << "Sciezka: ";
-    for (int city : path) 
-    {
-        std::cout << city << " ";
-    }
-    std::cout << std::endl;
+    return path;
 }

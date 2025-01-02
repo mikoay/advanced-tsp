@@ -8,5 +8,5 @@ class GreedyRandomized
 {
 public:
 	GreedyRandomized(Problem* p);
-	void solve() override;
+	std::vector<int> solve() override;
 };

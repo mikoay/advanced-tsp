@@ -5,7 +5,7 @@ NearestNeighbour::NearestNeighbour(Problem* p)
 	this->problem = p;
 }
 
-void NearestNeighbour::solve()
+std::vector<int> NearestNeighbour::solve()
 {
     std::vector<int> route;
     std::vector<bool> visited(problem->n, false);
@@ -36,8 +36,7 @@ void NearestNeighbour::solve()
         }
         if (next_city == -1) 
         {
-            std::cerr << "Brak dopuszczalnego rozwiazania" << std::endl;
-            return;
+            return {};
         }
         route.push_back(next_city);
         visited[next_city] = true;
@@ -53,15 +52,7 @@ void NearestNeighbour::solve()
     }
     else 
     {
-        std::cerr << "Brak rozwiazania" << std::endl;
-        return;
+        return {};
     }
-    std::cout << "====NEAREST NEIGHBOUR====" << std::endl;
-    std::cout << "Minimalny dystans: " << total_distance << std::endl;
-    std::cout << "Sciezka: ";
-    for (int city : route) 
-    {
-        std::cout << city << " ";
-    }
-    std::cout << std::endl;
+    return route;
 }

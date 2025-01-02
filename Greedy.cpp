@@ -5,7 +5,7 @@ Greedy::Greedy(Problem* p)
     this->problem = p;
 }
 
-void Greedy::solve()
+std::vector<int> Greedy::solve()
 {
     std::vector<int> route;
     std::vector<bool> visited(problem->n, false);
@@ -30,8 +30,7 @@ void Greedy::solve()
         }
         if (next_city == -1) 
         {
-            std::cerr << "Brak dopuszczalnego rozwiazania" << std::endl;
-            return;
+            return {};
         }
         route.push_back(next_city);
         visited[next_city] = true;
@@ -46,14 +45,7 @@ void Greedy::solve()
     }
     else 
     {
-        std::cerr << "Brak dopuszczalnego rozwiazania" << std::endl;
-        return; 
+        return {};
     }
-    std::cout << "====GREEDY====" << std::endl;
-    std::cout << "Minimalny dystans: " << total_distance << std::endl;
-    std::cout << "Sciezka: ";
-    for (int city : route) {
-        std::cout << city << " ";
-    }
-    std::cout << std::endl;
+    return route;
 }

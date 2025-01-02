@@ -14,9 +14,14 @@ public:
 	Problem(unsigned int a, std::vector<std::vector<int>> b, std::vector<std::pair<int, int>> c, unsigned int d);
 	~Problem();
 	void generateInstance(unsigned int n, unsigned int distanceStartRange, unsigned int distanceStopRange, unsigned int minWindowWidth, unsigned int maxWindowWidth, unsigned int timeMargin);
+	void printProblem() const;
+	bool solvable;
+private:
+	std::vector<int> optimal_route;
+	unsigned int optimal_route_distance;
 	void printN() const;
 	void printD() const;
 	void printT() const;
 	void printZ() const;
-	void printProblem() const;
+	std::vector<int> getOptimalRoute();
 };
