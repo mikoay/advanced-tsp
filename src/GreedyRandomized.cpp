@@ -7,6 +7,14 @@ GreedyRandomized::GreedyRandomized(Problem* p)
 
 std::vector<int> GreedyRandomized::solve()
 {
+    if (this->problem->n <= 0)
+    {
+        return {};
+    }
+    if (this->problem->n == 1)
+    {
+        return { 0, 0 };
+    }
     std::vector<int> route;
     std::vector<bool> visited(problem->n, false);
     int current_city = 0;

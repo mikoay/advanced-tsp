@@ -10,6 +10,14 @@ SimulatedAnnealing::SimulatedAnnealing(Problem* p, double it, double cr, double 
 
 std::vector<int> SimulatedAnnealing::solve()
 {
+    if (this->problem->n <= 0)
+    {
+        return {};
+    }
+    if (this->problem->n == 1)
+    {
+        return { 0, 0 };
+    }
     srand(time(NULL));
     current_solution.resize(problem->n + 1);
     for (unsigned int i = 0; i < problem->n; ++i) 

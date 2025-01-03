@@ -1,4 +1,4 @@
-#include "Test.h"
+#include "Benchmark.h"
 
 Test::Test(unsigned int input_n)
 {

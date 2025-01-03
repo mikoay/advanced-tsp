@@ -6,7 +6,7 @@
 #include "GreedyRandomized.h"
 #include "NearestNeighbour.h"
 #include "SimulatedAnnealing.h"
-#include "Test.h"
+#include "Benchmark.h"
 #include "json.hpp"
 
 using json = nlohmann::json;

@@ -7,6 +7,14 @@ Greedy::Greedy(Problem* p)
 
 std::vector<int> Greedy::solve()
 {
+    if (this->problem->n <= 0)
+    {
+        return {};
+    }
+    if (this->problem->n == 1)
+    {
+        return { 0, 0 };
+    }
     std::vector<int> route;
     std::vector<bool> visited(problem->n, false);
     int current_city = 0;
@@ -43,7 +51,7 @@ std::vector<int> Greedy::solve()
         total_distance += problem->d[current_city][0];
         route.push_back(0);
     }
-    else 
+    if (total_distance > this->problem->z)
     {
         return {};
     }
