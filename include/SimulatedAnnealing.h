@@ -10,7 +10,7 @@ public:
 	double cooling_rate;
 	int max_iterations;
 	SimulatedAnnealing(Problem* p, double it, double cr, double mi);
-	std::vector<int> solve() override;
+	std::vector<int> solve(bool stats) override;
 private:
 	std::vector<int> current_solution;
 	std::vector<int> best_solution;

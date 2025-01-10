@@ -2,17 +2,36 @@
 
 GreedyRandomized::GreedyRandomized(Problem* p)
 {
+    this->name = "Greedy Randomized";
     this->problem = p;
 }
 
-std::vector<int> GreedyRandomized::solve()
+std::vector<int> GreedyRandomized::solve(bool stats)
 {
+    clock_t startTime = clock();
+    size_t startMem = this->getMemoryUsage();
     if (this->problem->n <= 0)
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return {};
     }
     if (this->problem->n == 1)
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return { 0, 0 };
     }
     std::vector<int> route;
@@ -38,6 +57,14 @@ std::vector<int> GreedyRandomized::solve()
         }
         if (candidates.empty()) 
         {
+            clock_t endTime = clock();
+            size_t endMem = this->getMemoryUsage();
+            double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+            size_t totalMem = endMem - startMem;
+            if (stats)
+            {
+                this->benchmarkSummary(totalTime, totalMem);
+            }
             return {};
         }
         int next_city;
@@ -61,7 +88,23 @@ std::vector<int> GreedyRandomized::solve()
     route.push_back(0);
     if (total_distance > problem->z)
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return {};
+    }
+    clock_t endTime = clock();
+    size_t endMem = this->getMemoryUsage();
+    double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+    size_t totalMem = endMem - startMem;
+    if (stats)
+    {
+        this->benchmarkSummary(totalTime, totalMem);
     }
     return route;
 }

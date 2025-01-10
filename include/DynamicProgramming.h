@@ -6,5 +6,5 @@ class DynamicProgramming
 {
 public:
 	DynamicProgramming(Problem* p);
-	std::vector<int> solve() override;
+	std::vector<int> solve(bool stats) override;
 };

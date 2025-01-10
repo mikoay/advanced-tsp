@@ -20,7 +20,7 @@ TEST_CASE("Test dla pustego problemu")
 	};
 	for (auto& algorithm : algorithms)
 	{
-		REQUIRE(algorithm->solve() == std::vector<int>{});
+		REQUIRE(algorithm->solve(false) == std::vector<int>{});
 	}
 }
 
@@ -36,7 +36,7 @@ TEST_CASE("Test dla problemu z jednym miastem")
 	};
 	for (auto& algorithm : algorithms)
 	{
-		REQUIRE(algorithm->solve() == std::vector<int>{0, 0});
+		REQUIRE(algorithm->solve(false) == std::vector<int>{0, 0});
 	}
 }
 
@@ -58,7 +58,7 @@ TEST_CASE("Test dla malych instancji problemow")
 		};
 		for (auto& algorithm : algorithms)
 		{
-			REQUIRE(algorithm->solve() == problem.second);
+			REQUIRE(algorithm->solve(false) == problem.second);
 		}
 	}
 }
@@ -81,7 +81,41 @@ TEST_CASE("Test niespelnialnosci")
 		};
 		for (auto& algorithm : algorithms)
 		{
-			REQUIRE(algorithm->solve() == std::vector<int>{});
+			REQUIRE(algorithm->solve(false) == std::vector<int>{});
+		}
+	}
+}
+
+TEST_CASE("Test deterministycznoœci")
+{
+	std::vector<Problem*> problems = {
+	new Problem(3, {{0, 15, 25}, {15, 0, 10}, {25, 10, 0}}, {{0, 10}, {25, 45}, {20, 40}}, 30),
+	new Problem(4, {{0, 15, 40, 25}, {15, 0, 10, 20}, {40, 10, 0, 30}, {25, 20, 30, 0}}, {{0, 5}, {40, 80}, {30, 45}, {50, 100}}, 80),
+	new Problem(5, {{0, 15, 5, 10, 30}, {15, 0, 35, 10, 20}, {5, 35, 0, 30, 25}, {10, 10, 30, 0, 15}, {30, 20, 25, 15, 0}}, {{0, 20}, {10, 20}, {50, 60}, {80, 90}, {40, 45}}, 110)
+	};
+	unsigned short int num_of_tests = 5;
+	for (auto& problem : problems)
+	{
+		std::vector<Algorithm*> algorithms = {
+			new DynamicProgramming(problem),
+			new Greedy(problem),
+			new GreedyRandomized(problem),
+			new NearestNeighbour(problem),
+			new SimulatedAnnealing(problem, 1000, 0.95, 1000)
+		};
+		for (auto& algorithm : algorithms)
+		{
+			std::vector<int> first_solution = algorithm->solve(false);
+			bool same = true;
+			for (int i = 0; i < num_of_tests; i++)
+			{
+				if (algorithm->solve(false) != first_solution)
+				{
+					same = false;
+					break;
+				}
+			}
+			REQUIRE(same);
 		}
 	}
 }

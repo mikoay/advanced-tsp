@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ctime>
+#include <windows.h>
 #include "Problem.h"
 #include "DynamicProgramming.h"
 #include "Greedy.h"

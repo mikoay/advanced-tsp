@@ -2,20 +2,39 @@
 
 SimulatedAnnealing::SimulatedAnnealing(Problem* p, double it, double cr, double mi) 
 {
+    this->name = "Simulated Annealing";
 	this->problem = p;
     this->initial_temperature = it;
     this->cooling_rate = cr;
     this->max_iterations = mi;
 }
 
-std::vector<int> SimulatedAnnealing::solve()
+std::vector<int> SimulatedAnnealing::solve(bool stats)
 {
+    clock_t startTime = clock();
+    size_t startMem = this->getMemoryUsage();
     if (this->problem->n <= 0)
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return {};
     }
     if (this->problem->n == 1)
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return { 0, 0 };
     }
     srand(time(NULL));
@@ -48,12 +67,25 @@ std::vector<int> SimulatedAnnealing::solve()
     }
     if (best_distance == -1) 
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return {};
     }
-    else 
+    clock_t endTime = clock();
+    size_t endMem = this->getMemoryUsage();
+    double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+    size_t totalMem = endMem - startMem;
+    if (stats)
     {
-        return best_solution;
+        this->benchmarkSummary(totalTime, totalMem);
     }
+    return best_solution;
 }
 
 int SimulatedAnnealing::calculateDistance(const std::vector<int>& solution)

@@ -6,5 +6,5 @@ class NearestNeighbour
 {
 public:
 	NearestNeighbour(Problem* p);
-	std::vector<int> solve() override;
+	std::vector<int> solve(bool stats) override;
 };

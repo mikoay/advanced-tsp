@@ -2,11 +2,14 @@
 
 DynamicProgramming::DynamicProgramming(Problem* p)
 {
+    this->name = "Dynamic Programming";
     this->problem = p;
 }
 
-std::vector<int> DynamicProgramming::solve()
+std::vector<int> DynamicProgramming::solve(bool stats)
 {
+    clock_t startTime = clock();
+    size_t startMem = this->getMemoryUsage();
     const int INF = std::numeric_limits<int>::max();
     unsigned int n = this->problem->n;
     const auto& d = this->problem->d;
@@ -14,10 +17,26 @@ std::vector<int> DynamicProgramming::solve()
     unsigned int z = this->problem->z;
     if (n <= 0)
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return {};
     }
     if (n == 1)
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return { 0, 0 };
     }
     std::vector<std::vector<int>> DP(1 << n, std::vector<int>(n, INF));
@@ -75,7 +94,23 @@ std::vector<int> DynamicProgramming::solve()
     }
     if (min_distance == INF) 
     {
+        clock_t endTime = clock();
+        size_t endMem = this->getMemoryUsage();
+        double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+        size_t totalMem = endMem - startMem;
+        if (stats)
+        {
+            this->benchmarkSummary(totalTime, totalMem);
+        }
         return {};
+    }
+    clock_t endTime = clock();
+    size_t endMem = this->getMemoryUsage();
+    double totalTime = double(endTime - startTime) / CLOCKS_PER_SEC;
+    size_t totalMem = endMem - startMem;
+    if (stats)
+    {
+        this->benchmarkSummary(totalTime, totalMem);
     }
     std::vector<int> path;
     int current_city = last_city;
