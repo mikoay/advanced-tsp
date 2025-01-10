@@ -15,8 +15,10 @@ class Application
 {
 public:
 	Application(const std::string& file_name);
+	~Application();
 	void run();
 private:
 	std::vector<Problem*> problems;
 	void loadProblems(const std::string& file_name);
+	void saveProblems(const std::string& file_name);
 };
